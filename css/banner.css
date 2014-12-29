@@ -1,0 +1,31 @@
+* {
+    margin: 0;
+    padding: 0;
+    -webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+            box-sizing: border-box;
+}
+#banner {
+	white-space: nowrap;
+    background: #123D66;
+    height: 75px;
+    border-bottom:3px solid black;
+    border-top:3px solid black;
+}
+#bannerText{
+	font-size:30px;
+    font-weight: bold;
+    color: #FFF;
+    font-family: arial,verdana,sans-serif;
+    margin-left: 110px;
+    margin-top: 13px;
+		//vertical-align: middle;
+}
+#bannerImg {
+    width: 70px;
+    height: 55px;
+    margin-left: 20px;
+    margin-top: 7px;
+	float: left;
+    vertical-align: middle;
+}

@@ -1,0 +1,39 @@
+p {
+    margin: 20px 0;
+}
+#noDisplay{
+        display:none;
+}
+
+#results{
+    clear:both;
+    padding-top: 20px;
+}
+
+table {
+    width: 30%;
+    border-collapse: collapse;
+}
+
+#search {
+	white-space: nowrap;
+	text-align: top;
+}
+/* Zebra striping */
+tr:nth-of-type(odd) {
+    background: #eee;
+}
+tr:hover{
+	background-color: #ffff99;
+}
+th {
+    background: #333;
+    color: white;
+    font-weight: bold;
+}
+td, th {
+	padding: 6px;
+	border: 1px solid #ccc;
+	text-align: left;
+	vertical-align:top;
+}
