@@ -192,7 +192,7 @@ BUTTONS;
 				$resultClause = "SELECT * FROM networkflows";
 				
 				if (!isset($_POST['submit'])) {
-					$resultClause = "SELECT * FROM networkflows LIMIT 1";
+					$resultClause = "SELECT * FROM networkflows LIMIT 10";
 				}
  
 				$whereExists = FALSE;
@@ -312,7 +312,7 @@ BUTTONS;
 						$noteValue = $row['note'];
 						
 						echo <<< COPYVALUES
-						<form action='/networkflows/newform.php' method='post'>
+						<td><form action='/networkflows/newform.php' method='post'>
 							<div id='noDisplay'>
 								<input type='textbox' name='environmentCopy' value="$environmentValue"></input>
 								<input type='textbox' name='typeCopy' value="$typeValue"></input>
@@ -328,7 +328,7 @@ BUTTONS;
 								<input type='textbox' name='noteCopy' value="$noteValue"></input>
 							</div>
 							
-							<td><input type="submit" value="Copy Record" name="copy">
+							<input type="submit" value="Copy Record" name="copy">
 							<input type="submit" value="Edit Record" name="edit">
 						</form>
 COPYVALUES;
