@@ -6,7 +6,7 @@
         <link rel="stylesheet" href="/css/menu.css" />
         <link rel="stylesheet" href="/css/network.css" />
         <script src="/js/jquery-1.11.1.min.js"></script>
-        <script src="/js/menu.js" /></script>
+        <script src="/js/menu.js"></script>
     </head>
     <body>
         <?php include_once("../menu.html"); ?>		
@@ -192,7 +192,7 @@ BUTTONS;
 				$resultClause = "SELECT * FROM networkflows";
 				
 				if (!isset($_POST['submit'])) {
-					$resultClause = "SELECT * FROM networkflows LIMIT 10";
+					$resultClause = "SELECT * FROM networkflows LIMIT 1";
 				}
  
 				$whereExists = FALSE;
@@ -374,7 +374,7 @@ TABLEVALUES;
 				else {
 					echo "<br>No results found...";
 				}
-				echo "</div>";
+				echo "</table></div>";
 			//END CREATE RESULT TABLE
 			?>
 		</div> 
