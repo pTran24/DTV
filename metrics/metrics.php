@@ -24,23 +24,23 @@
 			$currentDay = date("d");
 			//echo "Current Date: $currentDate";
 			if (isset($_GET["slength"])){
-				$stublength = $_GET["slength"];
+				$stubLength = $_GET["slength"];
 			}
 			if (isset($_GET["sinterval"])){
-				$stubinterval = $_GET["sinterval"];
+				$stubInterval = $_GET["sinterval"];
 			}
 			if (isset($_GET["tlength"])){
-				$txnlength = $_GET["tlength"];
+				$txnLength = $_GET["tlength"];
 			}
 			if (isset($_GET["tinterval"])){
-				$txninterval = $_GET["tinterval"];
+				$txnInterval = $_GET["tinterval"];
 			}
 			if (isset($_GET["page_y"])){
 				$page_y = $_GET["page_y"];
 			}else{
 				$page_y = "0";
 			}
-			#//echo "$stublength $stubinterval $txnlength $txninterval";
+			#//echo "$stubLength $stubInterval $txnLength $txnInterval";
 
 			$totalSQL = 'SELECT
 				    		IFNULL(hostip, "TOTAL") as Server,
@@ -56,51 +56,44 @@
 			#############################################
 			#Generate SQL for Stubs Created Over Time
 			#############################################
-			if (empty($stublength)){
-				$stublength = "12"; #Choose from selection box later
+			if (empty($stubLength)){
+				$stubLength = "12"; #Choose from selection box later
 			}
-			$stubLengthCnt = $stublength;
-			if (empty($stubinterval)){
-				$stubinterval = "MONTH"; #Choose from selection box later day/week/month/year
+			$stubLengthCnt = $stubLength;
+			if (empty($stubInterval)){
+				$stubInterval = "MONTH"; #Choose from selection box later day/week/month/year
 			}
+	
 			$stubsCreatedSQL = "SELECT IFNULL(hostip, 'TOTAL') as Server,";
 			
-			$beginTime = strtotime("$currentDate -{$stublength} $stubinterval");
-			#$oldbeginTime = strtotime("$currentDate");
-			#$newbeginTime = new DateTime("$oldbeginTime");
-			#$beginTime = $newbeginTime->modify("-{$stublength} $stubinterval");	
+			if ($stubInterval == "MONTH"){
+				$currentDate = date("Y-m-01");
+			}
+			else{
+				$currentDate = date("Y-m-d");
+			}
+			$beginTime = strtotime("$currentDate -{$stubLength} $stubInterval");
 			$beginDate = date('Y-m-d', "$beginTime");
-			
-			#if ($stubinterval == "MONTH"){
-			#	$feb = $currentMonth - $stublength;
-			#	if ($feb == 2 && $currentDay > 28){
-			#		$beginDate = date('Y-m-28', "$beginTime");	
-			#	}
-			#}
-			#else{
-			#	$beginDate = date('Y-m-d', "$beginTime");
-			#}
-			#echo "BeginDate: $beginDate\n";
 
 			while ($stubLengthCnt>=0){
-				$startTime = strtotime("$currentDate -{$stubLengthCnt} $stubinterval");
+				$startTime = strtotime("$currentDate -{$stubLengthCnt} $stubInterval");
 				$startDate = date('Y-m-d', "$startTime");
 				
 				#Set endTime to be 1 interval larger than begin time
-				$endTime = strtotime("$startDate +1 $stubinterval");
+				$endTime = strtotime("$startDate +1 $stubInterval");
 				$endDate = date('Y-m-d', "$endTime");
 
 				#Get column-name (by intervals)
-				if ($stubinterval == "DAY"){
+				if ($stubInterval == "DAY"){
 					$colName = date('Y-m-d', $startTime);
 				}
-				elseif ($stubinterval == "MONTH"){
+				elseif ($stubInterval == "MONTH"){
 					$colName = date('M - Y',$startTime);
 					$startDate = date('Y-m-01', $startTime);
 					$endDate = date('Y-m-01', "$endTime");
 					$beginDate = date('Y-m-01', "$beginTime");
 				}
-				elseif ($stubinterval =="YEAR"){
+				elseif ($stubInterval =="YEAR"){
 					$colName = date('Y',$startTime);
 					$startDate = date('Y-01-01', $startTime);
 					$endDate = date('Y-01-01', "$endTime");
@@ -121,37 +114,43 @@
 			###############################
 			#Generate SQL for Txn Over Time
 			###############################
-			if (empty($txnlength)){
-				$txnlength = "7"; #Choose from selection box later
+			if (empty($txnLength)){
+				$txnLength = "7"; #Choose from selection box later
 			}
-			$txnLengthCnt = $txnlength;
-			if (empty($txninterval)){
-				$txninterval = "DAY"; #Choose from selection box later day/week/month/year
+			$txnLengthCnt = $txnLength;
+			if (empty($txnInterval)){
+				$txnInterval = "DAY"; #Choose from selection box later day/week/month/year
 			}
 			$txnSQL = "SELECT IFNULL(server, 'TOTAL') as Server,";
+			if ($txnInterval == "MONTH"){
+				$currentDate = date("Y-m-01");
+			}
+			else{
+				$currentDate = date("Y-m-d");
+			}
 			
-			$beginTime = strtotime("$currentDate -{$txnlength} $txninterval");
+			$beginTime = strtotime("$currentDate -{$txnLength} $txnInterval");
 			$beginDate = date('Y-m-d', "$beginTime");
 			
 			while( $txnLengthCnt>=0 ){
-				$startTime = strtotime("$currentDate -{$txnLengthCnt} $txninterval");
+				$startTime = strtotime("$currentDate -{$txnLengthCnt} $txnInterval");
 				$startDate = date('Y-m-d', "$startTime");
 				
 				#Set endTime to be 1 interval larger than begin time
-				$endTime = strtotime("$startDate +1 $txninterval");
+				$endTime = strtotime("$startDate +1 $txnInterval");
 				$endDate = date('Y-m-d', "$endTime");
 				
 				#Get column-name (by intervals)
-				if ($txninterval == "DAY"){
+				if ($txnInterval == "DAY"){
 					$colName = date('Y-m-d', $startTime);
 				}
-				elseif ($txninterval == "MONTH"){
+				elseif ($txnInterval == "MONTH"){
 					$colName = date('M - Y',$startTime);
 					$startDate = date('Y-m', $startTime);
 					$endDate = date('Y-m-01', "$endTime");
 					$beginDate = date('Y-m-01', "$beginTime");
 				}
-				elseif ($txninterval =="YEAR"){
+				elseif ($txnInterval =="YEAR"){
 					$colName = date('Y',$startTime);
 					$startDate = date('Y', $startTime);
 					$endDate = date('Y-01-01', "$endTime");
@@ -234,14 +233,14 @@
 		<table id='stubsOverTime'>
 			<caption>
 				Stubs created over past
-				<select id='stublength'>
+				<select id='stubLength'>
 					<?php 
 						for ($i=1; $i<=31; ++$i){
 								echo "<option value='$i'>$i</option>";
 						}
 					?>
 				</select>
-				<select id="stubinterval">
+				<select id="stubInterval">
 					<option value='DAY'>DAYS</option>
 					<option value='MONTH'>MONTHS</option>
 					<option value='YEAR'>YEARS</option>
@@ -273,14 +272,14 @@
 		<table id='txnOverTime'>
 			<caption>
 				Transactions over past
-				<select id="txnlength">
+				<select id="txnLength">
 					<?php 
 						for ($i=1; $i<=31; ++$i){
 								echo "<option value='$i'>$i</option>";
 						}
 					?>
 				</select>
-				<select id="txninterval">
+				<select id="txnInterval">
 					<option value='DAY' selected="selected">DAYS</option>
 					<option value='MONTH'>MONTHS</option>
 					<option value='YEAR'>YEARS</option>
@@ -348,18 +347,18 @@
 			}
 
 			//Set dropdown button to selected option
-			$("#stublength").val("<?php echo "$stublength" ?>");
-			$("#stubinterval").val("<?php echo "$stubinterval" ?>");
-			$("#txnlength").val("<?php echo "$txnlength" ?>");
-			$("#txninterval").val("<?php echo "$txninterval" ?>");
+			$("#stubLength").val("<?php echo "$stubLength" ?>");
+			$("#stubInterval").val("<?php echo "$stubInterval" ?>");
+			$("#txnLength").val("<?php echo "$txnLength" ?>");
+			$("#txnInterval").val("<?php echo "$txnInterval" ?>");
 			
 			//Upon select box change, update URL to values of current selected boxes
 			$("select").change(function() {
 				var page_y = $( document ).scrollTop();
-				var slength = $("#stublength").val();
-				var sinterval = $("#stubinterval").val();
-				var tlength = $("#txnlength").val();
-				var tinterval = $("#txninterval").val();
+				var slength = $("#stubLength").val();
+				var sinterval = $("#stubInterval").val();
+				var tlength = $("#txnLength").val();
+				var tinterval = $("#txnInterval").val();
 				window.location = '//' + location.host + location.pathname +'?slength='+slength+'&sinterval='+sinterval+'&tlength='+tlength+'&tinterval='+tinterval+'&page_y='+page_y;
 			});
 			$( 'html, body' ).scrollTop(<?php echo "$page_y"; ?>);
