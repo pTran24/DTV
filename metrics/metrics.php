@@ -20,6 +20,8 @@
 			}
 			
 			$currentDate = date("Y-m-d");
+			$currentMonth = date("m");
+			$currentDay = date("d");
 			//echo "Current Date: $currentDate";
 			if (isset($_GET["slength"])){
 				$stublength = $_GET["slength"];
@@ -64,8 +66,22 @@
 			$stubsCreatedSQL = "SELECT IFNULL(hostip, 'TOTAL') as Server,";
 			
 			$beginTime = strtotime("$currentDate -{$stublength} $stubinterval");
+			#$oldbeginTime = strtotime("$currentDate");
+			#$newbeginTime = new DateTime("$oldbeginTime");
+			#$beginTime = $newbeginTime->modify("-{$stublength} $stubinterval");	
 			$beginDate = date('Y-m-d', "$beginTime");
 			
+			#if ($stubinterval == "MONTH"){
+			#	$feb = $currentMonth - $stublength;
+			#	if ($feb == 2 && $currentDay > 28){
+			#		$beginDate = date('Y-m-28', "$beginTime");	
+			#	}
+			#}
+			#else{
+			#	$beginDate = date('Y-m-d', "$beginTime");
+			#}
+			#echo "BeginDate: $beginDate\n";
+
 			while ($stubLengthCnt>=0){
 				$startTime = strtotime("$currentDate -{$stubLengthCnt} $stubinterval");
 				$startDate = date('Y-m-d', "$startTime");
