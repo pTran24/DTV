@@ -5,8 +5,17 @@
 		<link rel="stylesheet" href="/css/banner.css" />
         <link rel="stylesheet" href="/css/menu.css" />
         <link rel="stylesheet" href="/css/network.css" />
+    	<link rel="stylesheet" href="/css/flexselect.css" type="text/css" media="screen" />
         <script src="/js/jquery-1.11.1.min.js"></script>
         <script src="/js/menu.js"></script>
+    	<script src="/js/liquidmetal.js" type="text/javascript"></script>
+    	<script src="/js/jquery.flexselect.js" type="text/javascript"></script>
+    	<script type="text/javascript">
+        	$(document).ready(function() {
+        		$("select.special-flexselect").flexselect({ hideDropdownOnEmptyInput: true });
+        		$("select.flexselect").flexselect();
+      		});
+    	</script>
     </head>
     <body>
         <?php include_once("../menu.html"); ?>		
