@@ -13,7 +13,9 @@
         <script type="text/javascript">
             $(document).ready(function() {
                 $("select.special-flexselect").flexselect({ hideDropdownOnEmptyInput: true });
-                $("select.flexselect").flexselect();
+                $("select.flexselect").flexselect({
+					//allowMismatch: true
+				});
             });
         </script>
 
