@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>LISA Catalog</title>
-    	<link rel="stylesheet" href="/css/banner.css" />
+        <title>No-Match Warnings</title>
+		<link rel="stylesheet" href="/css/banner.css" />
 		<link rel="stylesheet" href="/css/menu.css" />
 		<link rel="stylesheet" href="/css/jquery.dataTables.css" />
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    	<script src="/js/menu.js" /></script>
+		<script src="/js/menu.js" /></script>
         <script src="/js/jquery.dataTables.js"></script>
 	</head>
     <body>
-		<?php include_once("../menu.html"); ?>
+		<?php include_once("/menu.html"); ?>
 		<div id='page-wrap'>
 		<?php
 			$con=mysqli_connect("localhost:3333","grapes_sqauser","sq44$3r","lisacatalog");
@@ -18,7 +18,7 @@
 			if (mysqli_connect_errno($con)){
 				echo "Failed to conenct to MySQL: " . mysqli_connecterror();
 			}
-			$sqlSelect = "SELECT IFNULL(d.environment, 'NULL') as Environment, IFNULL(d.hostip, 'NULL') as HostIP, IFNULL(l.serviceName, 'NULL') as ServiceName, IFNULL(m.imagename, 'NULL') as ImageName, IFNULL(l.status, 'NULL') as Status, IFNULL(l.uptime, 'NULL') as UpTime, IFNULL(l.capacity, 'NULL') as Capacity, IFNULL(l.errors, 'NULL') as Errors, IFNULL(m.lisaproject, 'NULL') as LISAProject, IFNULL(m.port, 'NULL') as Port, IFNULL(m.basepath, 'NULL') as BasePath FROM domain d INNER JOIN lisalog l ON l.hostip = d.hostip LEFT JOIN lisamar m ON l.servicename = m.modelname AND l.hostip = m.hostip;";
+			$sqlSelect = "SELECT server as Server, DATE_FORMAT(date, '%Y-%m-%d') as Day, serviceName as ServiceName, operation as Operation, count(arguments) as Occurences FROM `nomatch` GROUP BY server, Day ORDER BY Day desc, server, serviceName;";
 			$queryResult = mysqli_query($con, "$sqlSelect") or die(mysqli_error);
 			$queryRowNum = mysqli_num_rows($queryResult);
 			
@@ -36,7 +36,7 @@
 				$cnt = 1;
 				$cnt2 = 0;
 				foreach ($columnNameArr as $colName){
-					if ($colName != 'capacity' && $colName != 'timestamp' && $colName != 'uptime' && $colName != 'errors'){
+					#if ($colName != 'capacity' && $colName != 'timestamp' && $colName != 'uptime' && $colName != 'errors'){
 						echo "
 						<table class='filter_table'>
 							<tr>
@@ -48,7 +48,7 @@
 								<td class='hidden'><input type='checkbox' class='column_filter' id='col${cnt2}_smart' checked='checked'></td>
 							</tr>
 						</table>";
-					}
+					#}
 					$cnt++;
 					$cnt2++;
 				}
