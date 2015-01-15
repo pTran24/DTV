@@ -145,8 +145,6 @@
 				}
 				function fillPost ($postName){
 					//Fills the post data into the page. If it's not filled in or the dropdown isn't specified, returns a null value.
-					//if (isset($_POST[$postName]) && $_POST[$postName] != "Select a $postName" && $_POST[$postName] != "Select an $postName"){
-					//if (isset($_POST[$postName]) && $_POST[$postName] != "Select $postName"){
 					if (isset($_POST[$postName])){
 						$value = $_POST[$postName];
 					}
@@ -201,7 +199,7 @@ BUTTONS;
 				$resultClause = "SELECT * FROM networkflows";
 				
 				if (!isset($_POST['submit'])) {
-					$resultClause = "SELECT * FROM networkflows LIMIT 10";
+					$resultClause = "SELECT * FROM networkflows ORDER BY environment, type, sourceLocation, sourceIP, destination LIMIT 10;";
 				}
  
 				$whereExists = FALSE;
