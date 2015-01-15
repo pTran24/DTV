@@ -10,7 +10,7 @@
         <script src="/js/jquery.dataTables.js"></script>
 	</head>
     <body>
-		<?php include_once("../menu.html"); ?>
+		<?php include_once("/menu.html"); ?>
 		<div id='page-wrap'>
 		<?php
 			$con=mysqli_connect("localhost:3333","grapes_sqauser","sq44$3r","lisacatalog");
