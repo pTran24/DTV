@@ -10,7 +10,7 @@
         <script src="/js/jquery.dataTables.js"></script>
 	</head>
     <body>
-		<?php include_once("../menu.html"); ?>
+		<?php include_once("/menu.html"); ?>
 		<div id='page-wrap'>
 		<?php
 			$con=mysqli_connect("localhost:3333","grapes_sqauser","sq44$3r","lisacatalog");
@@ -18,7 +18,27 @@
 			if (mysqli_connect_errno($con)){
 				echo "Failed to conenct to MySQL: " . mysqli_connecterror();
 			}
-			$sqlSelect = "SELECT IFNULL(d.environment, 'NULL') as Environment, IFNULL(d.hostip, 'NULL') as HostIP, IFNULL(l.serviceName, 'NULL') as ServiceName, IFNULL(m.imagename, 'NULL') as ImageName, IFNULL(l.status, 'NULL') as Status, IFNULL(l.uptime, 'NULL') as UpTime, IFNULL(l.capacity, 'NULL') as Capacity, IFNULL(l.errors, 'NULL') as Errors, IFNULL(m.lisaproject, 'NULL') as LISAProject, IFNULL(m.port, 'NULL') as Port, IFNULL(m.basepath, 'NULL') as BasePath FROM domain d INNER JOIN lisalog l ON l.hostip = d.hostip LEFT JOIN lisamar m ON l.servicename = m.modelname AND l.hostip = m.hostip;";
+			#$sqlSelect = "SELECT IFNULL(d.environment, 'NULL') as Environment, IFNULL(d.hostip, 'NULL') as HostIP, IFNULL(l.serviceName, 'NULL') as ServiceName, IFNULL(m.imagename, 'NULL') as ImageName, IFNULL(l.status, 'NULL') as Status, IFNULL(l.uptime, 'NULL') as UpTime, IFNULL(l.capacity, 'NULL') as Capacity, IFNULL(l.errors, 'NULL') as Errors, IFNULL(m.lisaproject, 'NULL') as LISAProject, IFNULL(m.port, 'NULL') as Port, IFNULL(m.basepath, 'NULL') as BasePath FROM domain d INNER JOIN lisalog l ON l.hostip = d.hostip LEFT JOIN lisamar m ON l.servicename = m.modelname AND l.hostip = m.hostip;";
+			$sqlSelect = "SELECT 
+							d.environment as Environment, 
+							d.hostip as HostIP, 
+							l.serviceName as ServiceName, 
+							IFNULL(m.imagename, 'NULL') as ImageName, 
+							l.status as Status, 
+							l.starttime as StartTime, 
+							l.capacity as Capacity, 
+							l.txncnt as Txn,
+							l.errors as Errors, 
+							m.lisaproject as LISAProject, 
+							IFNULL(m.author, 'NULL') as Author, 
+							IFNULL(m.createdate, 'NULL') as CreateDate, 
+							IFNULL(m.modifydate, 'NULL') as ModifyDate, 
+							l.port as Port, 
+							l.basepath as BasePath 
+						FROM						 
+							domain d 
+							INNER JOIN lisalog l ON l.hostip = d.hostip 
+							LEFT JOIN lisamar m ON l.servicename = m.modelname AND l.hostip = m.hostip;";
 			$queryResult = mysqli_query($con, "$sqlSelect") or die(mysqli_error);
 			$queryRowNum = mysqli_num_rows($queryResult);
 			
@@ -36,7 +56,8 @@
 				$cnt = 1;
 				$cnt2 = 0;
 				foreach ($columnNameArr as $colName){
-					if ($colName != 'capacity' && $colName != 'timestamp' && $colName != 'uptime' && $colName != 'errors'){
+					#if ($colName != 'capacity' && $colName != 'timestamp' && $colName != 'Environment' && $colName != 'Capacity' && $colName != 'UpTime' && $colName != 'Errors'){
+					if ($colName != 'Environment' && $colName != 'Txn' && $colName != 'TxnPerSec' && $colName != 'PeakTxnPerSec' && $colName != 'Capacity' && $colName != 'Errors'){
 						echo "
 						<table class='filter_table'>
 							<tr>

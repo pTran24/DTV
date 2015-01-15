@@ -4,12 +4,12 @@
 		<title>LISA Metrics</title>
 		<link rel="stylesheet" href="/css/banner.css" />
         <link rel="stylesheet" href="/css/menu.css" />
-		<link rel="stylesheet" href="css/metrics.css" />	
+		<link rel="stylesheet" href="/metrics/css/metrics.css" />	
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
     </head>
     <body>
-        <?php include_once("../menu.html"); ?>
+        <?php include_once("/menu.html"); ?>
 		<div id='page-wrap'>
 		<?php
 			date_default_timezone_set('America/Los_Angeles');
