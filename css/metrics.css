@@ -12,9 +12,9 @@ body {
 p {
     margin: 20px 0;
 }
-#page-wrap {
-    margin: 30px;
-}
+//#page-wrap {
+//    margin: 30px;
+//}
 table {
 	border-collapse:collapse;
 	//margin: auto;
