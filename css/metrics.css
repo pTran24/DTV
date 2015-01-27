@@ -42,7 +42,8 @@ td, th {
 th {
     //background: #333;
     //background: #838B8B;
-	background: #97FFFF;
+	//background: #97FFFF;
+	background: #C6D4FF;
     font-weight: bold;
 }
 thead tr {
@@ -50,7 +51,7 @@ thead tr {
     //border-bottom: 2px solid #424242;
 }
 caption {
-	font-family: 'Enriqueta', arial, serif; line-height: 1.25; margin: 0 0 10px; font-size: 15px; font-weight: bold;
+	font-family: 'Enriqueta', arial, serif; line-height: 1.25; margin: 0 0 10px; font-size: 14px; font-weight: bold;
 	text-align: left;
 	white-space: nowrap;
 }
