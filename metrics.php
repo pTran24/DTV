@@ -4,9 +4,8 @@
 		<title>LISA Metrics</title>
 		<link rel="stylesheet" href="/css/banner.css" />
         <link rel="stylesheet" href="/css/menu.css" />
-		<link rel="stylesheet" href="/metrics/css/metrics.css" />	
+		<link rel="stylesheet" href="/css/metrics.css" />	
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-
     </head>
     <body>
         <?php include_once("/menu.html"); ?>
