@@ -23,15 +23,13 @@
 							d.environment as Environment, 
 							d.hostip as HostIP, 
 							l.serviceName as ServiceName, 
-							IFNULL(m.imagename, 'NULL') as ImageName, 
 							l.status as Status, 
 							l.starttime as StartTime, 
 							l.capacity as Capacity, 
 							l.txncnt as Txn,
 							l.errors as Errors, 
-							m.lisaproject as LISAProject, 
+							m.lisaproject as Project, 
 							IFNULL(m.author, 'NULL') as Author, 
-							IFNULL(m.createdate, 'NULL') as CreateDate, 
 							IFNULL(m.modifydate, 'NULL') as ModifyDate, 
 							l.port as Port, 
 							l.basepath as BasePath 
@@ -57,7 +55,8 @@
 				$cnt2 = 0;
 				foreach ($columnNameArr as $colName){
 					#if ($colName != 'capacity' && $colName != 'timestamp' && $colName != 'Environment' && $colName != 'Capacity' && $colName != 'UpTime' && $colName != 'Errors'){
-					if ($colName != 'Environment' && $colName != 'Txn' && $colName != 'TxnPerSec' && $colName != 'PeakTxnPerSec' && $colName != 'Capacity' && $colName != 'Errors'){
+					#Show filter boxes, excluding those in 'if' statement
+                    if ($colName != 'ModifyDate' && $colName != 'StartTime' && $colName != 'Environment' && $colName != 'Txn' && $colName != 'TxnPerSec' && $colName != 'PeakTxnPerSec' && $colName != 'Capacity' && $colName != 'Errors'){
 						echo "
 						<table class='filter_table'>
 							<tr>
