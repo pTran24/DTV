@@ -30,12 +30,9 @@
         fclose($configfile);
         
         $con=mysqli_connect("$host","$user","$pw","lisacatalog");
-        #$con=mysqli_connect("localhost:3333","grapes_sqauser","sq44$3r","lisacatalog");
-        #$con=mysqli_connect("localhost","grapes_sqauser","sq44$3r","lisacatalog");#MAMP connection
         if (mysqli_connect_errno($con)){
             echo "Failed to conenct to MySQL: " . mysqli_connecterror();
         }
-        #$sqlSelect = "SELECT IFNULL(d.environment, 'NULL') as Environment, IFNULL(d.hostip, 'NULL') as HostIP, IFNULL(l.serviceName, 'NULL') as ServiceName, IFNULL(m.imagename, 'NULL') as ImageName, IFNULL(l.status, 'NULL') as Status, IFNULL(l.uptime, 'NULL') as UpTime, IFNULL(l.capacity, 'NULL') as Capacity, IFNULL(l.errors, 'NULL') as Errors, IFNULL(m.lisaproject, 'NULL') as LISAProject, IFNULL(m.port, 'NULL') as Port, IFNULL(m.basepath, 'NULL') as BasePath FROM domain d INNER JOIN lisalog l ON l.hostip = d.hostip LEFT JOIN lisamar m ON l.servicename = m.modelname AND l.hostip = m.hostip;";
         $sqlSelect =
             "SELECT
                 d.environment as Environment,

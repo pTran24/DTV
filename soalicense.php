@@ -32,8 +32,6 @@
 
 	#Database Connection Info
 	$con=mysqli_connect("$host","$user","$pw","lisacatalog");
-	#$con=mysqli_connect("localhost:3333","grapes_sqauser","sq44$3r","soatest");
-	#$con=mysqli_connect("localhost","grapes_sqauser","sq44$3r","soatest"); #MAMP conn
 	if (mysqli_connect_errno($con)){
 		echo "Failed to conenct to MySQL: " . mysqli_connecterror();
 	}

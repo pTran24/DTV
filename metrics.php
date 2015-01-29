@@ -30,8 +30,6 @@
         fclose($configfile);
 
         $con=mysqli_connect("$host","$user","$pw","lisacatalog"); #DTV WAMP
-        #$con=mysqli_connect("localhost:3333","grapes_sqauser","sq44$3r","lisacatalog"); #DTV WAMP
-        #$con=mysqli_connect("localhost","grapes_sqauser","sq44$3r","lisacatalog");#MAMP connection
         if (mysqli_connect_errno($con)){
             echo "Failed to conenct to MySQL: " . mysqli_connecterror();
         }
