@@ -30,8 +30,6 @@
         fclose($configfile);
 
         $con=mysqli_connect("$host","$user","$pw","lisacatalog");
-        #$con=mysqli_connect("localhost:3333","grapes_sqauser","sq44$3r","lisacatalog");
-        #$con=mysqli_connect("localhost","grapes_sqauser","sq44$3r","lisacatalog");#MAMP connection
         if (mysqli_connect_errno($con)){
             echo "Failed to conenct to MySQL: " . mysqli_connecterror();
         }
@@ -80,8 +78,8 @@
                     foreach ($columnNameArr as $colName){
                         echo "<th>$colName</th>";
                     }
-                    echo "</tr>";
-                    ?>
+                echo "</tr>";
+                ?>
             </thead>
             <tbody>
                 <?php //populate data rows
