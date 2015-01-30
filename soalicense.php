@@ -31,13 +31,13 @@
 	fclose($configfile);
 
 	#Database Connection Info
-	$con=mysqli_connect("$host","$user","$pw","lisacatalog");
+	$con=mysqli_connect("$host","$user","$pw","soatest");
 	if (mysqli_connect_errno($con)){
 		echo "Failed to conenct to MySQL: " . mysqli_connecterror();
 	}
 	$sqlSelect = "SELECT DATE_FORMAT(`time`, '%Y-%m-%d') as DATE, concat(`username`,' - ',`email`) as INFO,`hostname` as HOST, TRUNCATE((count(1) * 0.23300971), 0) as REFRESHES FROM `licenselog` l, `userinfo` u WHERE l.username = u.userid AND`time` > NOW() - INTERVAL 1 WEEK group by DATE_FORMAT(`time`, '%Y-%m-%d'), username order by DATE_FORMAT(time, '%Y-%m-%d') asc, REFRESHES desc";
-	$queryResult = mysqli_query($con, "$sqlSelect") or die(mysqli_error);
-	$queryRowNum = mysqli_num_rows($queryResult);
+    $queryResult = mysqli_query($con, "$sqlSelect") or die(mysqli_error);
+    $queryRowNum = mysqli_num_rows($queryResult);
 
 	$noTokenQuery = "SELECT time, username, hostname, CONCAT(major,'.', minor) AS version FROM `licenselog` WHERE statusmsg = 'NO_MORE_TOKENS' order by time desc LIMIT 20";
 	$noTokenResult = mysqli_query($con, "$noTokenQuery") or die(mysqli_error);
