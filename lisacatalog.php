@@ -43,6 +43,7 @@
                 l.capacity as Capacity,
                 l.txncnt as Txn,
                 l.errors as Errors,
+                m.build as Build,
                 m.lisaproject as Project,
                 IFNULL(m.author, 'NULL') as Author,
                 IFNULL(m.modifydate, 'NULL') as ModifyDate,
@@ -73,7 +74,7 @@
             foreach ($columnNameArr as $colName){
                 #if ($colName != 'capacity' && $colName != 'timestamp' && $colName != 'Environment' && $colName != 'Capacity' && $colName != 'UpTime' && $colName != 'Errors'){
                 #Show filter boxes, excluding those in 'if' statement
-                if ($colName != 'ModifyDate' && $colName != 'StartTime' && $colName != 'Environment' && $colName != 'Txn' && $colName != 'TxnPerSec' && $colName != 'PeakTxnPerSec' && $colName != 'Capacity' && $colName != 'Errors'){
+                if ($colName != 'ModifyDate' && $colName != 'StartTime' && $colName != 'Environment' && $colName != 'TxnPerSec' && $colName != 'PeakTxnPerSec' && $colName != 'Capacity' && $colName != 'Errors'){
                     echo "
                     <table class='filter_table'>
                         <tr>
