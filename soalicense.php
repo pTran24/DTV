@@ -19,13 +19,13 @@
 	while(!feof($configfile)) {
 		$line = fgets($configfile);
 		if (preg_match("/mysqlhost=(.*)/", $line, $match)) {
-			$host = $match[1];
+			$host = trim($match[1]);
 		}
 		if (preg_match("/mysqlusr=(.*)/", $line, $match)) {
-			$user = $match[1];
+			$user = trim($match[1]);
 		}
 		if (preg_match("/mysqlpw=(.*)/", $line, $match)) {
-			$pw = $match[1];
+			$pw = trim($match[1]);
 		}
 	}
 	fclose($configfile);
