@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>LISA Catalog</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">-->
 </head>
 <body>
     <div class="container">
@@ -12,18 +12,19 @@
         while(!feof($configfile)) {
             $line = fgets($configfile);
             if (preg_match("/mysqlhost=(.*)/", $line, $match)) {
-                $host = $match[1];
+                $host = trim($match[1]);
             }
             if (preg_match("/mysqlusr=(.*)/", $line, $match)) {
-                $user = $match[1];
+                $user = trim($match[1]);
             }
             if (preg_match("/mysqlpw=(.*)/", $line, $match)) {
-                $pw = $match[1];
+                $pw = trim($match[1]);
             }
         }
         fclose($configfile);
-        echo "$host $user $pw";
+
         $con=mysqli_connect("$host","$user","$pw","lisacatalog");
+        #$con=mysqli_connect("localhost","grapes_sqauser","sq44$3r","lisacatalog");
         if (mysqli_connect_errno($con)){
             echo "Failed to conenct to MySQL: " . mysqli_connecterror();
         }
