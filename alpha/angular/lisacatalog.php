@@ -2,14 +2,13 @@
 <html>
 <head>
     <title>LISA Catalog</title>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 </head>
 <body>
-    <?php include_once("../../menu.html"); ?>
-    <div id='page-wrap'>
+    <div class="container">
         <?php
         # Read in config file
-        $configfile = fopen("../Wamp.conf", "r") or die("Unable to open file!");
+        $configfile = fopen("Wamp.conf", "r") or die("Unable to open file!");
         while(!feof($configfile)) {
             $line = fgets($configfile);
             if (preg_match("/mysqlhost=(.*)/", $line, $match)) {
@@ -23,7 +22,7 @@
             }
         }
         fclose($configfile);
-        
+        echo "$host $user $pw";
         $con=mysqli_connect("$host","$user","$pw","lisacatalog");
         if (mysqli_connect_errno($con)){
             echo "Failed to conenct to MySQL: " . mysqli_connecterror();
@@ -87,7 +86,7 @@
         </div>
 
         <!-- Output Table -->
-        <table id='example' class="hidden">
+        <table id='results'>
             <thead>
                 <?php //print Header Column
                 echo "<tr>";
@@ -110,9 +109,11 @@
             </tbody>
         </table>
     </div>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
     <script>
         $(document).ready(function(){
-            $("table#example").removeClass("hidden"); //Display table after jquery is applied to prevent double-take effect
             $("#example").colResizable({
                 fixed:false,
                 liveDrag:false
