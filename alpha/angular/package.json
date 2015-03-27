@@ -1,0 +1,16 @@
+{
+  "name": "lisacatalog",
+  "version": "1.0.0",
+  "description": "",
+  "main": "Server.js",
+  "scripts": {
+    "test": "node Server.js"
+  },
+  "author": "Phong",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.12.3",
+    "mysql": "^2.6.0",
+    "sequelize": "^2.0.5"
+  }
+}
