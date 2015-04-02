@@ -2,15 +2,15 @@
 <html>
 <head>
     <title>LISA Catalog</title>
-    <link rel="stylesheet" href="/css/banner.css" />
-    <link rel="stylesheet" href="/css/menu.css" />
-    <link rel="stylesheet" href="/css/jquery.dataTables.css" />
+    <link rel="stylesheet" href="css/banner.css" />
+    <link rel="stylesheet" href="css/menu.css" />
+    <link rel="stylesheet" href="css/jquery.dataTables.css" />
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="/js/menu.js" /></script>
-    <script src="/js/jquery.dataTables.js"></script>
+    <script src="js/menu.js" /></script>
+    <script src="js/jquery.dataTables.js"></script>
 </head>
 <body>
-    <?php include_once("/menu.html"); ?>
+    <?php include_once("menu.html"); ?>
     <div id='page-wrap'>
         <?php
         # Read in config file
