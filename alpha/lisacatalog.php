@@ -65,6 +65,7 @@
             $columnNameArr[$i] = $nameField->name;
             $i++;
         }
+
         ?>
 
         <div id="table_filters">
