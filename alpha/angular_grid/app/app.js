@@ -9,7 +9,7 @@ app.filter('startFrom', function() {
         return [];
     }
 });
-app.controller('customersCrtl', function ($scope, $http, $timeout) {
+app.controller('customersCtrl', function ($scope, $http, $timeout) {
     $http.get('ajax/getCustomers.php').success(function(data){
         $scope.list = data;
         $scope.currentPage = 1; //current page
