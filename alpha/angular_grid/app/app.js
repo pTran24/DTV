@@ -27,6 +27,7 @@ app.controller('customersCtrl', function ($scope, $http, $timeout) {
         $scope.entryLimit = 5; // max no of items to display in a page
         $scope.filteredItems = $scope.list.length; // Initially for no filter
         $scope.totalItems = $scope.list.length;
+        $scope.search = [];
         $scope.setRange();
     });
     $scope.setPage = function(pageNo) {
@@ -43,7 +44,6 @@ app.controller('customersCtrl', function ($scope, $http, $timeout) {
         $scope.reverse = !$scope.reverse;
     };
     $scope.setRange = function() {
-        console.log("called");
         $scope.showBegin = $scope.currentPage * $scope.entryLimit - $scope.entryLimit + 1;
         $scope.showEnd   = $scope.currentPage * $scope.entryLimit;
         if ($scope.showEnd > $scope.filteredItems) {
