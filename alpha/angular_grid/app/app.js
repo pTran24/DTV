@@ -1,4 +1,13 @@
-var app = angular.module('myApp', ['ui.bootstrap']);
+var app = angular.module('myApp', ['ui.bootstrap', 'ngRoute']);
+// configure our routes
+app.config(function($routeProvider) {
+    $routeProvider
+    // route for the home page
+    .when('/catalog', {
+        templateUrl : 'views/catalog.html',
+        controller  : 'catalogCtrl'
+    })
+});
 
 app.filter('startFrom', function() {
     return function(input, start) {
@@ -10,18 +19,18 @@ app.filter('startFrom', function() {
     }
 });
 app.filter('regex', function() {
-  return function(input, field, regex) {
-      var patt = new RegExp(regex);
-      var out = [];
-      for (var i = 0; i < input.length; i++){
-          if(patt.test(input[i][field]))
-              out.push(input[i]);
-      }
-    return out;
-  };
+    return function(input, field, regex) {
+        var patt = new RegExp(regex);
+        var out = [];
+        for (var i = 0; i < input.length; i++){
+            if(patt.test(input[i][field]))
+            out.push(input[i]);
+        }
+        return out;
+    };
 });
-app.controller('customersCtrl', function ($scope, $http, $timeout) {
-    $http.get('ajax/getCustomers.php').success(function(data){
+app.controller('catalogCtrl', function ($scope, $http, $timeout) {
+    $http.get('ajax/getCatalog.php').success(function(data){
         $scope.list = data; // query result
         $scope.currentPage = 1; // current page
         $scope.entryLimit = 5; // max no of items to display in a page
@@ -53,18 +62,18 @@ app.controller('customersCtrl', function ($scope, $http, $timeout) {
     $scope.tableHeader = [
         'Environment',
         'HostIP',
-        'Status',
         'ServiceName',
-        'StartTime',
-        'Capacity',
+        'Status',
         'Txn',
         'Errors',
-        'Build',
+        'Port',
+        'BasePath',
         'Project',
         'Author',
-        'ModifyDate',
-        'Port',
-        'BasePath'
+        'Capacity',
+        'Build',
+        'StartTime',
+        'ModifyDate'
     ];
     $scope.test = "Status";
 });
