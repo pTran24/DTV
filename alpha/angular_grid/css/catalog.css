@@ -17,3 +17,6 @@ td {
 .nav, .pagination, .carousel, .panel-title a {
     cursor: pointer;
 }
+input[type="text"] {
+    width: 100%;
+}
