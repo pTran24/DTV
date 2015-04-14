@@ -18,6 +18,7 @@ app.filter('startFrom', function() {
         return [];
     }
 });
+
 app.filter('regex', function() {
     return function(input, field, regex) {
         var patt = new RegExp(regex);
@@ -29,6 +30,26 @@ app.filter('regex', function() {
         return out;
     };
 });
+
+app.controller('navCtrl', function ($scope) {
+    $scope.tabs = [
+        { link : '#/catalog', label : 'Catalog' },
+        { link : '#/invoices', label : 'Invoices' },
+        { link : '#/payments', label : 'Payments' }
+    ];
+    $scope.selectedTab = $scope.tabs[0];
+    $scope.setSelectedTab = function(tab) {
+        $scope.selectedTab = tab;
+    }
+    $scope.tabClass = function(tab) {
+        if ($scope.selectedTab == tab) {
+            return "active";
+        } else {
+            return "";
+        }
+    };
+});
+
 app.controller('catalogCtrl', function ($scope, $http, $timeout) {
     $http.get('ajax/getCatalog.php').success(function(data){
         $scope.list = data; // query result
@@ -39,6 +60,7 @@ app.controller('catalogCtrl', function ($scope, $http, $timeout) {
         $scope.search = [];
         $scope.setRange();
     });
+
     $scope.setPage = function(pageNo) {
         $scope.currentPage = pageNo;
         $scope.setRange();

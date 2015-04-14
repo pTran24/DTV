@@ -8,32 +8,22 @@
 </head>
 <body>
     <!-- Navigation Bar -->
-    <nav class="navbar navbar-default">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="/">SQA Tools</a>
-            </div>
-
-            <!-- <ul class="nav navbar-nav nav-tabs">
-            <!-- <ul class="nav nav-tabs"> --
-                <li><a href="#catalog">Catalog</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#contact"> Contact</a></li>
-            </ul> -->
-        </div>
-        <tabset>
-            <tab heading="Catalog"><a href="#catalog"></a></tab>
-            <tab heading="My Heading"><a href="#about"></a></tab>
-            <tab heading="My Heading"><a href="#contact"> </a></tab>
-        </tabset>
+    <nav class="container-fluid navbar navbar-default">
+        <a class="navbar-brand" href="#">SQA Tools</a>
+        <ul class="nav navbar-nav nav-tabs" ng-controller="navCtrl">
+            <li ng-class="tabClass(tab)" ng-repeat="tab in tabs" ><a href="{{tab.link}}" ng-click="setSelectedTab(tab)">{{tab.label}}</a></li>
+        </ul>
     </nav>
 
-    <!-- Body Content Below -->
+    <!-- Content -->
     <div ng-view></div>
 
+    <!-- Footer -->
     <foot class="text-center">
         <p>Created by Phong Tran</p>
     </foot>
+
+    <!-- Javascript -->
     <script src="js/angular.min.js"></script>
     <script src="js/ui-bootstrap-tpls-0.10.0.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular-route.js"></script>
