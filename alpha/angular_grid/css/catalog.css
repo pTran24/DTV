@@ -1,9 +1,13 @@
 ul>li, a {
     cursor: pointer;
 }
-td {
+th, td {
+    max-width: 150px;
+    overflow: hidden;
+    text-overflow: ellipsis;
     white-space: nowrap;
 }
+
 .disable_text_highlighting {
     -webkit-touch-callout: none;
     -webkit-user-select: none; /* Webkit */

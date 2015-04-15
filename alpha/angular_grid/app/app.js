@@ -7,6 +7,11 @@ app.config(function($routeProvider) {
         templateUrl : 'views/catalog.html',
         controller  : 'catalogCtrl'
     })
+    .when('/metrics', {
+        templateUrl : 'views/metrics.html',
+        controller  : 'metricsCtrl'
+    })
+    .otherwise({redirectTo: '/catalog'})
 });
 
 app.filter('startFrom', function() {
@@ -34,7 +39,7 @@ app.filter('regex', function() {
 app.controller('navCtrl', function ($scope) {
     $scope.tabs = [
         { link : '#/catalog', label : 'Catalog' },
-        { link : '#/invoices', label : 'Invoices' },
+        { link : '#/metrics', label : 'Metrics' },
         { link : '#/payments', label : 'Payments' }
     ];
     $scope.selectedTab = $scope.tabs[0];
@@ -51,7 +56,7 @@ app.controller('navCtrl', function ($scope) {
 });
 
 app.controller('catalogCtrl', function ($scope, $http, $timeout) {
-    $http.get('ajax/getCatalog.php').success(function(data){
+    $http.get('ajax/getCatalog.php', {cache: true}).success(function(data){
         $scope.list = data; // query result
         $scope.currentPage = 1; // current page
         $scope.entryLimit = 5; // max no of items to display in a page
@@ -85,17 +90,35 @@ app.controller('catalogCtrl', function ($scope, $http, $timeout) {
         'Environment',
         'HostIP',
         'ServiceName',
+        'Port',
+        'BasePath',
         'Status',
         'Txn',
         'Errors',
-        'Port',
-        'BasePath',
         'Project',
-        'Author',
-        'Capacity',
         'Build',
+        'App',
+        'Env',
+        'Config',
+        'Author',
         'StartTime',
         'ModifyDate'
     ];
     $scope.test = "Status";
+});
+
+app.controller('metricsCtrl', function ($scope, $http, $timeout) {
+    $http.get('ajax/getMetrics-totalStatus.php').success(function(data){
+        $scope.metrics = data; // query result
+    });
+    $http.get('ajax/getMetrics-TotalStatus.php').success(function(data){
+        $scope.metrics = data; // query result
+    });
+    $scope.metricsHeader = [
+        'Server',
+        'Running',
+        'Loaded',
+        'Down',
+        'Total'
+    ];
 });
