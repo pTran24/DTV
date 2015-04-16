@@ -1,0 +1,12 @@
+<div class="col-md-3">
+    <table class="table table-striped table-bordered">
+        <thead>
+            <th ng-repeat="header in metricsHeader">{{header}}</th>
+        </thead>
+        <tbody>
+            <tr ng-repeat="data in metrics">
+                <td ng-repeat="header in metricsHeader">{{ data[header] }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
