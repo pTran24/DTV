@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html ng-app="myApp" ng-app lang="en">
+<head>
+    <meta charset="utf-8">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/catalog.css" rel="stylesheet">
+    <title>LISA Catalog Angular ver.</title>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="container-fluid navbar navbar-default">
+        <span class="navbar-brand">SQA Tools</span>
+        <ul class="nav navbar-nav nav-tabs" ng-controller="navCtrl">
+            <li ng-class="tabClass(tab)" ng-repeat="tab in tabs" ><a href="{{tab.link}}" ng-click="setSelectedTab(tab)">{{tab.label}}</a></li>
+        </ul>
+    </nav>
+
+    <!-- Content -->
+    <div ng-view></div>
+
+    <!-- Footer -->
+    <foot class="text-center">
+        <p>Created by Phong</p>
+    </foot>
+
+    <!-- Javascript -->
+    <script src="js/angular.min.js"></script>
+    <script src="js/ui-bootstrap-tpls-0.10.0.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular-route.js"></script>
+    <script src="app/app.js"></script>
+    <script src="js/resizable.js"></script>
+</body>
+</html>

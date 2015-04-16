@@ -1,0 +1,26 @@
+ul>li, a {
+    cursor: pointer;
+}
+th, td {
+    max-width: 150px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.disable_text_highlighting {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none; /* Webkit */
+    -moz-user-select: none;    /* Firefox */
+    -ms-user-select: none;     /* IE 10  */
+
+    /* Currently not supported in Opera but will be soon */
+    -o-user-select: none;
+    user-select: none;
+}
+.nav, .pagination, .carousel, .panel-title a {
+    cursor: pointer;
+}
+input[type="text"] {
+    width: 100%;
+}
