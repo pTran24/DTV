@@ -1,76 +1,25 @@
-/**
- * enables resizable data table columns.
- * Script by Ingo Hofmann
- */
-(function($) {
+$(".resizable th").resizable({
+ handles: "e",
 
-    /**
-     * Widget makes columns of a table resizable.
-     */
-    $.widget("ih.resizableColumns", {
+ // set correct COL element and original size
+ start: function(event, ui) {
+   var colIndex = ui.helper.index() + 1;
+   colElement = table.find("colgroup > col:nth-child(" +
+     colIndex + ")");
 
-        /**
-         * initializing columns
-         */
-        _create: function() {
-            this._initResizable();
-        },
+  // get col width (faster than .width() on IE)
+  colWidth = parseInt(colElement.get(0).style.width, 10);
+  originalSize = ui.size.width;
+ },
 
-        /**
-         * init jQuery UI sortable
-         */
-        _initResizable: function() {
+ // set COL width
+ resize: function(event, ui) {
+   var resizeDelta = ui.size.width - originalSize;
 
-            var colElement, colWidth, originalSize;
-            var table = this.element;
+   var newColWidth = colWidth + resizeDelta;
+   colElement.width(newColWidth);
 
-            this.element.find("th").resizable({
-                // use existing DIV rather than creating new nodes
-                handles: {
-                    "e": " .resizeHelper"
-                },
-
-                // default min width in case there is no label
-                minWidth: 10,
-
-                // set min-width to label size
-                create: function(event, ui) {
-                    var minWidth = $(this).find(".columnLabel").width();
-                    if (minWidth) {
-
-                        // FF cannot handle absolute resizable helper
-                        /*if ($.browser.mozilla) {
-                            minWidth += $(this).find(".ui-resizable-e").width();
-                        }*/
-                        minWidth += $(this).find(".ui-resizable-e").width();
-
-                        $(this).resizable("option", "minWidth", minWidth);
-                    }
-                },
-
-                // set correct COL element and original size
-                start: function(event, ui) {
-                    var colIndex = ui.helper.index() + 1;
-                    colElement = table.find("colgroup > col:nth-child(" + colIndex + ")");
-                    colWidth = parseInt(colElement.get(0).style.width, 10); // faster than width
-                    originalSize = ui.size.width;
-                },
-
-                // set COL width
-                resize: function(event, ui) {
-                    var resizeDelta = ui.size.width - originalSize;
-
-                    var newColWidth = colWidth + resizeDelta;
-                    colElement.width(newColWidth);
-
-                    // height must be set in order to prevent IE9 to set wrong height
-                    $(this).css("height", "auto");
-                }
-            });
-        }
-
-    });
-
-    // init resizable
-    $(".resizable").resizableColumns();
-})(jQuery);
+   // height must be set in order to prevent IE9 to set wrong height
+   $(this).css("height", "auto");
+ }
+});

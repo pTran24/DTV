@@ -11,6 +11,9 @@ app.config(function($routeProvider) {
         templateUrl : 'views/metrics.html',
         controller  : 'metricsCtrl'
     })
+    .when('/test', {
+        templateUrl : 'views/test.html'
+    })
     .otherwise({redirectTo: '/catalog'})
 });
 
@@ -40,7 +43,7 @@ app.controller('navCtrl', function ($scope) {
     $scope.tabs = [
         { link : '#/catalog', label : 'Catalog' },
         { link : '#/metrics', label : 'Metrics' },
-        { link : '#/payments', label : 'Payments' }
+        { link : '#/test', label : 'Test' }
     ];
     $scope.selectedTab = $scope.tabs[0];
     $scope.setSelectedTab = function(tab) {
