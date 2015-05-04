@@ -1,5 +1,5 @@
 <?php
-$DB_HOST = 'localhost';
+$DB_HOST = 'localhost:3333';
 $DB_USER = 'grapes_sqauser';
 $DB_PASS = 'sq44$3r';
 $DB_NAME = 'lisacatalog';

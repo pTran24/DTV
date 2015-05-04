@@ -59,7 +59,7 @@ app.controller('catalogCtrl', function ($scope, $http, $timeout) {
     $http.get('ajax/getCatalog.php', {cache: true}).success(function(data){
         $scope.list = data; // query result
         $scope.currentPage = 1; // current page
-        $scope.entryLimit = 5; // max no of items to display in a page
+        $scope.entryLimit = 10; // max no of items to display in a page
         $scope.filteredItems = $scope.list.length; // Initially for no filter
         $scope.totalItems = $scope.list.length;
         $scope.search = [];
