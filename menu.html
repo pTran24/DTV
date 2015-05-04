@@ -1,5 +1,5 @@
 <div id="banner">
-	<img id="bannerImg" src="/images/directv-logo2.png"/>
+	<img id="bannerImg" src="images/directv-logo2.png"/>
     <div id="bannerText"></div>
 </div>
 <div id="nav">
@@ -10,7 +10,7 @@
 		<li id="networkflows"><a href="http://147.22.243.86:8080/networkflows/SQANetworkFlows.php" title="Reference table of network connection information.">Network Reference</a></li>
 		<li id="metrics"><a href="http://147.22.243.86:8080/metrics.php" title="Overview of Stub info.">LISA Metrics</a></li>
 	</ul>
-	<script type="text/javascript"> 
+	<script type="text/javascript">
 		//Highlight menu item and update banner name
 		var regex = /\/([^\/]*)[\.\/]/; //Grab content between backslash
     	var path = window.location.pathname;
@@ -19,7 +19,7 @@
         $("*[id*="+base[1]+"]:visible").each(function(){
             $(this).addClass("highlight");
     	    currentPage = $(this).text();
-    	});	
+    	});
 		$("#bannerText").text(currentPage);
 	</script>
 </div>
