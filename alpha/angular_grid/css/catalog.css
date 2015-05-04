@@ -2,7 +2,7 @@ ul>li, a {
     cursor: pointer;
 }
 th, td {
-    max-width: 150px;
+    /*max-width: 150px;*/
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
