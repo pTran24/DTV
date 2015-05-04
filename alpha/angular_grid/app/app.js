@@ -4,17 +4,17 @@ app.config(function($routeProvider) {
     $routeProvider
     // route for the home page
     .when('/catalog', {
-        templateUrl : 'views/catalog.html',
+        templateUrl : 'views/partial_catalog.html',
         controller  : 'catalogCtrl'
     })
     .when('/metrics', {
-        templateUrl : 'views/metrics.html',
+        templateUrl : 'views/partial_metrics.html',
         controller  : 'metricsCtrl'
     })
     .when('/test', {
-        templateUrl : 'views/test.html'
+        templateUrl : 'views/partial_test.html'
     })
-    .otherwise({redirectTo: '/catalog'})
+    .otherwise({redirectTo: '/partial_catalog'})
 });
 
 app.filter('startFrom', function() {
@@ -62,7 +62,7 @@ app.controller('catalogCtrl', function ($scope, $http, $timeout) {
     $http.get('ajax/getCatalog.php', {cache: true}).success(function(data){
         $scope.list = data; // query result
         $scope.currentPage = 1; // current page
-        $scope.entryLimit = 5; // max no of items to display in a page
+        $scope.entryLimit = 10; // max no of items to display in a page
         $scope.filteredItems = $scope.list.length; // Initially for no filter
         $scope.totalItems = $scope.list.length;
         $scope.search = [];
