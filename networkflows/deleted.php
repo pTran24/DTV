@@ -2,14 +2,14 @@
 <html>
 <head>
 	<title>Deleted Record History</title>
-	<link rel="stylesheet" href="/css/banner.css" />
-    <link rel="stylesheet" href="/css/menu.css" />
-    <link rel="stylesheet" href="/css/network.css" />
-    <script src="/js/jquery-1.11.1.min.js"></script>
-    <script src="/js/menu.js" /></script>
+	<link rel="stylesheet" href="css/banner.css" />
+    <link rel="stylesheet" href="css/menu.css" />
+    <link rel="stylesheet" href="css/network.css" />
+    <script src="js/jquery-1.11.1.min.js"></script>
+    <script src="js/menu.js" /></script>
 </head>
 <body>
-    <?php include_once("../menu.html"); ?>	
+    <?php include_once("../menu.html"); ?>
 	<div id="page-wrap">
 		<?php //CREATE CONNECTION, GET FORM INFORMATION
         # Read in config file
@@ -38,7 +38,7 @@
 			$resultQuery = mysqli_query($con, $resultClause);
 			$querySize = mysqli_num_rows($resultQuery);
 		?>
-		
+
 		<?php //FUNCTION DEFINITION
 		function storeColumns(&$con){
 			//Grabs titles from the database of the column titles, returns an array.
@@ -78,7 +78,7 @@
 			$noteValue = $row['note'];
 			$deleteReasonValue = $row['deleteReason'];
 			$deleteDateValue = $row['deleteDate'];
-			
+
 			echo <<< TABLEVALUES
 			<tr>
 			<td>$i</td>

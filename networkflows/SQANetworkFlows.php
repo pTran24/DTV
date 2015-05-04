@@ -2,14 +2,14 @@
 <html>
 <head>
     <title>Network Flows</title>
-    <link rel="stylesheet" href="/css/banner.css" />
-    <link rel="stylesheet" href="/css/menu.css" />
-    <link rel="stylesheet" href="/css/network.css" />
-    <link rel="stylesheet" href="/css/flexselect.css" type="text/css" media="screen" />
-    <script src="/js/jquery-1.11.1.min.js"></script>
-    <script src="/js/menu.js"></script>
-    <script src="/js/liquidmetal.js" type="text/javascript"></script>
-    <script src="/js/jquery.flexselect.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="../css/banner.css" />
+    <link rel="stylesheet" href="../css/menu.css" />
+    <link rel="stylesheet" href="../css/network.css" />
+    <link rel="stylesheet" href="../css/flexselect.css" type="text/css" media="screen" />
+    <script src="../js/jquery-1.11.1.min.js"></script>
+    <script src="../js/menu.js"></script>
+    <script src="../js/liquidmetal.js" type="text/javascript"></script>
+    <script src="../js/jquery.flexselect.js" type="text/javascript"></script>
     <script type="text/javascript">
         $(document).ready(function() {
             $("select.special-flexselect").flexselect({ hideDropdownOnEmptyInput: true });
@@ -18,7 +18,7 @@
     </script>
 </head>
 <body>
-    <?php include_once("../menu.html"); ?>      
+    <?php include_once("../menu.html"); ?>
     <div id="page-wrap">
         <?php //CREATE CONNECTION, GET FORM INFORMATION
         # Read in config file
@@ -36,7 +36,7 @@
             }
         }
         fclose($configfile);
-    
+
         #Database Connection Info
         $con=mysqli_connect("$host","$user","$pw","networkreference");
         if (mysqli_connect_errno($con)){
@@ -44,13 +44,13 @@
             echo "Failed to connect to MySQL: " . mysqli_connect_error();
         }
         $environmentPost = NULL;
-        $typePost = NULL; 
+        $typePost = NULL;
         $sourcePost = NULL;
         $sourceLocationPost = NULL;
         $destinationPost = NULL;
         $destinationLocationPost = NULL;
         $orderPost = NULL;
-    
+
         //If $_POST is defined. Set Post Variables.
         if (isset($_POST['submit'])) {
             $environmentPost = fillPost('Environment');
@@ -62,7 +62,7 @@
             $orderPost = fillPost('Order');
         }
         ?>
-        
+
         <?php //FUNCTION DEFINITIONS
         //Grabs column values from the database, returns an array. Note: Title = COLUMN
         function storeTitles($fieldName, &$con){
@@ -79,7 +79,7 @@
             $fieldRows = count($titleArray);
             return $titleArray;
         }
-        
+
         //Grabs COLUMN NAMES from database, returns an array.
         function storeColumns(&$con){
             $columnNames = "SELECT `COLUMN_NAME` FROM `INFORMATION_SCHEMA`.`COLUMNS` WHERE `TABLE_SCHEMA`='networkreference' AND `TABLE_NAME`='networkflows'";
@@ -91,7 +91,7 @@
             }
             return $columnArray;
         }
-        
+
         //Determines if a value is in the post data or not.
         //Assists with marking a box as checked after a search is made.
         function valueContained ($value, $postName){
@@ -115,7 +115,7 @@
                 return false;
             }
         }
-        
+
         //Outputs each array onto the page for search UI
         function displayArray($title, $array, $isCheckbox, $postName){
             //echo "<td>";
@@ -185,7 +185,7 @@
             sort ($destinationLocationTitles);
             $columnTitles = storeColumns($con);
         ?>
-        
+
         <div id="search">
             <h3>Query Options:</h3>
             <?php //OUTPUT SEARCH INTERFACE
@@ -209,11 +209,11 @@ BUTTONS;
             echo "</form>";
         ?>
         </div>
-        
+
         <?php //CREATE Search Query.
         //$resultClause = "SELECT * FROM networkflows where environment = 'Sources'";
         $resultClause = "SELECT * FROM networkflows";
-        
+
         if (!isset($_POST['submit'])) {
             $resultClause = "SELECT * FROM networkflows ORDER BY environment, type, sourceLocation, sourceIP, destination LIMIT 10;";
         }
@@ -226,7 +226,7 @@ BUTTONS;
         $environmentCount = count($environmentPost);
         $typeTotal = count($typeTitles);
         $typeCount = count($typePost);
-        
+
         //Create Query if user defined
         if ($environmentCount > 0){
             $resultClause .= ' WHERE (';
@@ -293,7 +293,7 @@ BUTTONS;
             $resultQuery = mysqli_query($con, $resultClause);
         }
         ?>
-    
+
         <?php //CREATE RESULT TABLE
         $querySize = mysqli_num_rows($resultQuery);
         echo "<div id='results'>";
@@ -329,7 +329,7 @@ BUTTONS;
                 $protocolValue = $row['protocol'];
                 $URLValue = $row['URL'];
                 $noteValue = $row['note'];
-                
+
                 echo <<< COPYVALUES
                 <td><form action='/networkflows/newform.php' method='post'>
                     <div id='noDisplay'>
@@ -346,7 +346,7 @@ BUTTONS;
                         <input type='textbox' name='URLCopy' value="$URLValue"></input>
                         <input type='textbox' name='noteCopy' value="$noteValue"></input>
                     </div>
-                    
+
                     <input type="submit" value="Copy Record" name="copy">
                     <input type="submit" value="Edit Record" name="edit">
                 </form>
@@ -395,6 +395,6 @@ TABLEVALUES;
         echo "</table></div>";
         //END CREATE RESULT TABLE
         ?>
-    </div> 
+    </div>
 </body>
 </html>

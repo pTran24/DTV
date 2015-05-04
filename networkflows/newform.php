@@ -2,14 +2,14 @@
 <html>
 <head>
 	<title>Change Existing Network Flows</title>
-	<link rel="stylesheet" href="/css/banner.css" />
-    <link rel="stylesheet" href="/css/menu.css" />
-    <link rel="stylesheet" href="/css/network.css" />
-    <link rel="stylesheet" href="/css/flexselect.css" type="text/css" media="screen" />
-    <script src="/js/jquery-1.11.1.min.js"></script>
-    <script src="/js/menu.js" /></script>
-    <script src="/js/liquidmetal.js" type="text/javascript"></script>
-    <script src="/js/jquery.flexselect.js" type="text/javascript"></script>
+	<link rel="stylesheet" href="../css/banner.css" />
+    <link rel="stylesheet" href="../css/menu.css" />
+    <link rel="stylesheet" href="../css/network.css" />
+    <link rel="stylesheet" href="../css/flexselect.css" type="text/css" media="screen" />
+    <script src="../js/jquery-1.11.1.min.js"></script>
+    <script src="../js/menu.js" /></script>
+    <script src="../js/liquidmetal.js" type="text/javascript"></script>
+    <script src="../js/jquery.flexselect.js" type="text/javascript"></script>
     <script type="text/javascript">
         $(document).ready(function() {
             $("select.special-flexselect").flexselect({ hideDropdownOnEmptyInput: true });
@@ -18,7 +18,7 @@
 
 </head>
 <body>
-    <?php include_once("../menu.html"); ?>	
+    <?php include_once("../menu.html"); ?>
 	<div id="page-wrap">
 		<?php //CREATE CONNECTION, GET FORM INFORMATION
         # Read in config file
@@ -36,7 +36,7 @@
             }
         }
         fclose($configfile);
-	
+
         $con=mysqli_connect("$host","$user","$pw", "networkreference");
 		$masterPassword = 'testing';
 		if (mysqli_connect_errno($con)){
@@ -85,7 +85,7 @@
 		$protocolModify = NULL;
 		$URLModify = NULL;
 		$noteModify = NULL;
-		
+
 		//Copies information from the form to retain the data.
 		if (isset($_POST['modify'])){
 			$environmentModify = $_POST['environmentEdit'];
@@ -101,7 +101,7 @@
 			$URLModify = $_POST['URLEdit'];
 			$noteModify = $_POST['noteEdit'];
 		}
-		
+
 		$environmentPost = NULL;
 		$typePost = NULL;
 		$sourceLocationPost = NULL;
@@ -115,7 +115,7 @@
 		$URLPost = NULL;
 		$notePost = NULL;
 		$passwordPost = NULL;
-		
+
 		if(isset($_POST['add']) || isset($_POST['modify'])){
 			//Fills the post information if records are either editted or added.
 			$environmentPost = fillPost('environment');
@@ -146,7 +146,7 @@
 			$titleArray = array_slice($titleArray, 0);
 			return $titleArray;
 		}
-		
+
 		function storeColumns(&$con){
 			$columnNames = "SELECT `COLUMN_NAME` FROM `INFORMATION_SCHEMA`.`COLUMNS` WHERE `TABLE_SCHEMA`='networkreference' AND `TABLE_NAME`='networkflows'";
 			$columnNames = mysqli_query($con, $columnNames);
@@ -157,7 +157,7 @@
 			}
 			return $columnArray;
 		}
-		
+
 		function notEmpty($postName){
 			//Returns whether or not a post is invalid.
 			if ($postName != NULL && $postName != ''){
@@ -165,7 +165,7 @@
 			}
 			return false;
 		}
-		
+
 		function insertDropdown ($array, $name, $copy){
 			echo "<td>";
 			echo "<select class='flexselect' name='$name' style='width:80%'>";
@@ -183,7 +183,7 @@ TEXTLITERAL;
 			}
 			echo "</td>";
 		}
-		
+
 		function insertTextbox ($name, $copy){
 			echo "<td>";
 			if (notEmpty($copy)){
@@ -210,7 +210,7 @@ TEXTLITERAL;
 				return $value;
 			}
 		?>
-		
+
 		<?php //GET EXISTING TITLES
 			$environmentTitles = storeTitles('Environment', $con);
 			sort ($environmentTitles);
@@ -230,7 +230,7 @@ TEXTLITERAL;
 		}
 		$columnTables = storeColumns($con);
 		echo "<form action='/networkflows/newform.php' method='post'>";
-		
+
 		if (isset($_POST['edit'])){
 			//Copy over values so they can be editted.
 			echo <<< EDITVALUES
@@ -286,7 +286,7 @@ EDITVALUES;
 		//Output password box.
 		echo "<td>" . '<input type="password" name="password">' . "</td>";
 		echo "</tr><tr>";
-		
+
 		if (isset($_POST['edit'])){
 			echo "<td>" . '<input type="submit" name="modify" value="Edit Existing Entry">' . "</td>";
 		}
@@ -314,15 +314,15 @@ EDITVALUES;
 			}
 			else if (isset($_POST['modify']) && notEmpty($environmentModify) && notEmpty($typeModify)){
 			//IF EDITTING ENTRY
-				$entry = "UPDATE networkflows SET environment = '$environmentPost', type = '$typePost', 
+				$entry = "UPDATE networkflows SET environment = '$environmentPost', type = '$typePost',
 					sourceLocation = '$sourceLocationPost', source = '$sourcePost', sourceIP = '$sourceIPPost',
-					destination = '$destinationPost', destinationLocation = '$destinationLocationPost', 
+					destination = '$destinationPost', destinationLocation = '$destinationLocationPost',
 					destinationIP = '$destinationIPPost', destinationPort = '$destinationPortPost',
 					protocol = '$protocolPost', URL = '$URLPost', note='$notePost'" .
-					" WHERE (environment = '$environmentModify') AND " . "(type = '$typeModify') AND " . 
+					" WHERE (environment = '$environmentModify') AND " . "(type = '$typeModify') AND " .
 					"(sourceLocation = '$sourceLocationModify') AND " . "(source = '$sourceModify') AND " .  "(sourceIP = '$sourceIPModify') AND " .
-					"(destination = '$destinationModify') AND " . "(destinationLocation = '$destinationLocationModify') AND " . 
-					"(destinationIP = '$destinationIPModify') AND " . "(destinationPort = '$destinationPortModify') AND " . 
+					"(destination = '$destinationModify') AND " . "(destinationLocation = '$destinationLocationModify') AND " .
+					"(destinationIP = '$destinationIPModify') AND " . "(destinationPort = '$destinationPortModify') AND " .
 					"(protocol = '$protocolModify') AND " . "(URL = '$URLModify') AND " . "(note='$noteModify')";
 				if (!mysqli_query($con, $entry)){
 					die('Error: ' . mysqli_error($con));
@@ -331,7 +331,7 @@ EDITVALUES;
 					echo "<script>alert('Record was succesfully editted!')</script>";
 				}
 			}
-			
+
 			else{
 				echo "<script>alert('No records were changed. If you are trying to edit, start from the SQANetworkFlows page.')</script>";
 			}

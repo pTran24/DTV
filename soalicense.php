@@ -2,12 +2,12 @@
 <html>
 <head>
 	<title>SOAtest License</title>
-	<link rel="stylesheet" href="/css/banner.css" />
-	<link rel="stylesheet" href="/css/menu.css" />
-	<link rel="stylesheet" href="/css/soatest.css" />
+	<link rel="stylesheet" href="css/banner.css" />
+	<link rel="stylesheet" href="css/menu.css" />
+	<link rel="stylesheet" href="css/soatest.css" />
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-	<script src="/js/menu.js" /></script>
-	<script src="/js/jquery.pivot.js"></script>
+	<script src="js/menu.js" /></script>
+	<script src="js/jquery.pivot.js"></script>
 </head>
 <body>
 	<?php include_once("/menu.html"); ?>

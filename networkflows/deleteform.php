@@ -2,14 +2,14 @@
 <html>
 <head>
 	<title>Delete New Network Flow</title>
-	<link rel="stylesheet" href="/css/banner.css" />
-    <link rel="stylesheet" href="/css/menu.css" />
-    <link rel="stylesheet" href="/css/network.css" />
-    <script src="/js/jquery-1.11.1.min.js"></script>
-    <script src="/js/menu.js" /></script>
+	<link rel="stylesheet" href="css/banner.css" />
+    <link rel="stylesheet" href="css/menu.css" />
+    <link rel="stylesheet" href="css/network.css" />
+    <script src="js/jquery-1.11.1.min.js"></script>
+    <script src="js/menu.js" /></script>
 </head>
 <body>
-    <?php include_once("../menu.html"); ?>		
+    <?php include_once("../menu.html"); ?>
 	<div id="page-wrap">
 		<?php //CREATE CONNECTION, GET FORM INFORMATION
 		// Create connection
@@ -28,7 +28,7 @@
             }
         }
         fclose($configfile);
-	
+
         $con=mysqli_connect("$host","$user","$pw", "networkreference");
 		$masterPassword = 'testing';
 		if (mysqli_connect_errno($con)){
@@ -36,7 +36,7 @@
 			echo "Failed to connect to MySQL: " . mysqli_connect_error();
 		}
 		$allEmpty = FALSE;
-		
+
 		//If "delete" post or "pass" field is filled out
 		if (isset($_POST['delete']) || isset($_POST['pass'])){
 			$environmentPost = $_POST['environmentDelete'];
@@ -72,7 +72,7 @@
 		<?php //FUNCTION DEFINITION
 		function storeColumns(&$con){
 			//Grabs COLUMN names from database, returns an array.
-			
+
 			$columnNames = "SELECT `COLUMN_NAME` FROM `INFORMATION_SCHEMA`.`COLUMNS` WHERE `TABLE_SCHEMA`='networkreference' AND `TABLE_NAME`='networkflows'";
 			$columnNames = mysqli_query($con, $columnNames);
 			$numColumns = mysqli_num_rows($columnNames);
@@ -83,7 +83,7 @@
 			return $columnArray;
 		}
 		?>
-	
+
 		<?php //USER INTERFACE
 		$deleteArray = array($environmentPost, $typePost, $sourceLocationPost, $sourcePost, $sourceIPPost, $destinationPost, $destinationLocationPost, $destinationIPPost, $destinationPortPost, $protocolPost, $URLPost, $notePost);
 		$columnTables = storeColumns($con);
@@ -95,7 +95,7 @@
 		echo "The following is the record you are about to <b>DELETE</b>:<br><br>";
 		echo "<table border='1'>";
 		echo "<tr>";
-		
+
 		foreach($columnTables as $value){
 			echo"<td>$value</td>";
 		}
@@ -121,7 +121,7 @@
 				<input type='textbox' name='URLDelete' value="$URLPost"></input>
 				<input type='textbox' name='noteDelete' value="$notePost"></input>
 			</div>
-			
+
 			<input type='password' name='pass'><br>
 			Please enter a reason for the record deletion:<br>
 			<input type='text' name='deleteReason'><br>
@@ -132,16 +132,16 @@ FORM;
 
 		<?php //TAKE ACTION BASED ON USER INPUT
 		if (isset($_POST['pass']) && $_POST['pass'] == $masterPassword){
-			$deletion = "DELETE FROM networkflows WHERE " . "(environment = '$environmentPost') AND " . "(type = '$typePost') AND " . 
+			$deletion = "DELETE FROM networkflows WHERE " . "(environment = '$environmentPost') AND " . "(type = '$typePost') AND " .
 						"(sourceLocation = '$sourceLocationPost') AND " . "(source = '$sourcePost') AND " .  "(sourceIP = '$sourceIPPost') AND " .
-						"(destination = '$destinationPost') AND " . "(destinationLocation = '$destinationLocationPost') AND " . 
-						"(destinationIP = '$destinationIPPost') AND " . "(destinationPort = '$destinationPortPost') AND " . 
+						"(destination = '$destinationPost') AND " . "(destinationLocation = '$destinationLocationPost') AND " .
+						"(destinationIP = '$destinationIPPost') AND " . "(destinationPort = '$destinationPortPost') AND " .
 						"(protocol = '$protocolPost') AND " . "(URL = '$URLPost') AND" . "(note = '$notePost')";
-			
+
 			$deletePost = $_POST['deleteReason'];
 			$recycleEntry = "INSERT INTO recyclebin (environment, type, sourceLocation, source, sourceIP, destination, destinationLocation, destinationIP, destinationPort, protocol, URL, note, deleteReason)" .
 			" VALUES ('$environmentPost', '$typePost', '$sourceLocationPost', '$sourcePost', '$sourceIPPost', '$destinationPost', '$destinationLocationPost', '$destinationIPPost', '$destinationPortPost', '$protocolPost', '$URLPost', '$notePost', '$deletePost')";
-			
+
 			if (!mysqli_query($con, $deletion)){
 				die('Error: ' . mysqli_error($con));
 			}
