@@ -1,0 +1,15 @@
+.query {
+    white-space: pre-wrap;
+}
+textarea {
+    width: 400px;
+    rows: 10;
+}
+input[type="text"] {
+    width: 30px;
+}
+
+form {
+    font-family: "Helvetica Neue,Helvetica,Arial,sans-serif";
+    font-size: 14px;
+}
