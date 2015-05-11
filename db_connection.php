@@ -15,7 +15,7 @@
     }
     fclose($configfile);
 
-    $con = mysqli_connect("$host","$user","$pw","lisacatalog"); #DTV WAMP
+    $con = mysqli_connect("$host","$user","$pw","catalog"); #DTV WAMP
     //$db = mysqli_select_db("lisacatalog")
     if (mysqli_connect_errno($con)){
         echo "Failed to conenct to MySQL: " . mysqli_connecterror();

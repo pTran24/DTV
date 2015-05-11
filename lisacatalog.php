@@ -28,60 +28,12 @@
             }
         }
         fclose($configfile);
-        
+
         $con=mysqli_connect("$host","$user","$pw","lisacatalog");
         if (mysqli_connect_errno($con)){
             echo "Failed to conenct to MySQL: " . mysqli_connecterror();
         }
-        #$sqlSelect =
-        #    "SELECT
-        #        d.environment as Environment,
-        #        d.hostip as HostIP,
-        #        l.serviceName as ServiceName,
-        #        l.port as Port,
-        #        l.basepath as BasePath,
-        #        l.status as Status,
-        #        l.txncnt as Txn,
-        #        l.errors as Errors,
-        #        m.lisaproject as Project,
-        #        m.build as Build,
-        #        IFNULL(m.author, 'NULL') as Author,
-        #        l.starttime as StartTime,
-        #        IFNULL(m.modifydate, 'NULL') as ModifyDate
-        #    FROM
-        #        domain d
-        #    INNER JOIN
-        #        lisalog l ON l.hostip = d.hostip
-        #    LEFT JOIN
-        #        lisamar m ON l.servicename = m.modelname AND l.hostip = m.hostip;";
-       # SQL: Get all deployed services and middle configs that match
-       # $sqlSelect = 
-       #     "SELECT
-       #         d.environment as Environment,
-       #         d.hostip as HostIP,
-       #         l.serviceName as ServiceName,
-       #         l.port as Port,
-       #         l.basepath as BasePath,
-       #         l.status as Status,
-       #         l.txncnt as Txn,
-       #         l.errors as Errors,
-       #         m.lisaproject as Project,
-       #         m.build as Build,
-       #         c.application as App,
-       #         c.environment as Env,
-       #         c.filename as Config,
-       #         m.author as Author,
-       #         l.starttime as StartTime,
-       #         m.modifydate as ModifyDate
-       #     FROM
-       #         domain d
-       #     INNER JOIN
-       #         lisalog l ON l.hostip = d.hostip
-       #     LEFT JOIN
-       #         lisamar m ON l.servicename = m.modelname AND l.hostip = m.hostip
-       #     LEFT JOIN 
-       #         middlewareconfigs c ON c.port = l.port AND c.basepath = l.basepath AND c.lisaserver = l.hostip
-       #     ORDER BY ServiceName;";
+        
         # SQL: Get all deployed services and ALL middleware configs
         $sqlSelect =
             "SELECT
