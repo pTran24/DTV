@@ -10,12 +10,12 @@
             $user = trim($match[1]);
         }
         if (preg_match("/mysqlpw=(.*)/", $line, $match)) {
-            $pw = trim($match[1]);
+			$pw = trim($match[1]);
         }
     }
     fclose($configfile);
 
-    $con = mysqli_connect("$host","$user","$pw","catalog"); #DTV WAMP
+    $con = mysqli_connect("$host","$user","$pw","catalog");
     //$db = mysqli_select_db("lisacatalog")
     if (mysqli_connect_errno($con)){
         echo "Failed to conenct to MySQL: " . mysqli_connecterror();

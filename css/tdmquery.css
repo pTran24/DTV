@@ -1,10 +1,7 @@
 .query {
     white-space: pre-wrap;
 }
-textarea {
-    width: 400px;
-    rows: 10;
-}
+
 input[type="text"] {
     width: 30px;
 }
@@ -12,4 +9,78 @@ input[type="text"] {
 form {
     font-family: "Helvetica Neue,Helvetica,Arial,sans-serif";
     font-size: 14px;
+}
+
+#sub {
+  	-webkit-border-radius: 9;
+  	-moz-border-radius: 9;
+  	border-radius: 9px;
+  	font-family: Arial;
+  	color: #ffffff;
+  	font-size: 14px;
+  	background: #2c8a65;
+  	padding: 7px 11px 7px 11px;
+		text-decoration: none;
+}
+
+#sub:hover {
+  background: #46bda5;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+#tabs {
+		width: 100%;
+		height:30px; 
+		border-bottom: solid 1px #CCC;
+		padding-right: 2px;
+}
+
+a {cursor:pointer;}
+
+#tabs li {
+    float:left; 
+    list-style:none; 
+    border-top:1px solid #ccc; 
+    border-left:1px solid #ccc; 
+    border-right:1px solid #ccc; 
+    margin-right:0px; 
+    border-top-left-radius:3px;  
+    border-top-right-radius:3px;
+		outline:none;
+}
+
+#tabs li a {
+    font-family:Arial, Helvetica, sans-serif; 
+    font-size: small;
+    font-weight: bold; 
+    color: #5685bc;;
+		padding-top: 5px;
+		padding-left: 7px;
+		padding-right: 7px;
+    padding-bottom: 8px; 
+    display:block; 
+    background: #FFF;
+    border-top-left-radius:3px; 
+    border-top-right-radius:3px; 
+    text-decoration:none;
+    outline:none;
+}
+
+#tabs li a.inactive{
+		border-bottom: 1px solid #ccc;
+    color:#666666;
+    background: #EEE;
+}
+
+#tabs li a:hover, #tabs li a.inactive:hover {
+		color: #5685bc;
+		outline:none;
+}
+
+.container {
+		clear:both;           
+		width:100%; 
+		text-align:left;
+		padding-top: 20px;
 }

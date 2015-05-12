@@ -201,54 +201,40 @@
            AND O.dnis IN ( '7110', '7111', '7112', '7114', '7115' )
            AND OM.acctnum > 1;
     ";
-
-    # Print query
-
-    $tdmArray = explode("\n", $tdmSQL); # Break query into array
+	
     # Remove lines from query if form is left blank
+	$tdmArray = explode("\n", $tdmSQL); # Break query into array
     foreach ($tdmArray as $key => $line) {
         if ( empty($beginDate) && stripos("$line", "orderdate >=") !== false) {
-            # echo "Removing: $line at $key<br />";
             unset($tdmArray[$key]);
         }
         if ( empty($endDate) && stripos("$line", "orderdate <") !== false) {
-            # echo "Removing: $line at $key<br />";
             unset($tdmArray[$key]);
         }
         if ( empty($acctNum) && stripos("$line", "acctnum IN") !== false) {
-            # echo "Removing: $line at $key<br />";
             unset($tdmArray[$key]);
         }
     }
     $tdmSQLFiltered = implode("\n", $tdmArray);
+	
     #echo "<pre>Filtered: $tdmSQLFiltered\n</pre>";
-    $result = mysqli_query($con, "$totalSQL") or die(mysqli_error);
+	
+    $result = mysqli_query($con, "$totalSQL") or die(mysqli_error); # Run query
+	
+	# Grab headers from result
     $headers = [];
     $i = 0;
     while($nameField = mysqli_fetch_field($result)){
         $headers[$i] = $nameField->name;
         $i++;
     }
-    // $fileName = 'query_output.txt';
-    //
-    // header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
-    // header('Content-Description: File Transfer');
-    // header("Content-type: text/plain");
-    // header("Content-Disposition: attachment; filename={$fileName}");
-    // header("Expires: 0");
-    // header("Pragma: public");
-    // $fh = @fopen( 'php://output', 'w' );
-    // $headerDisplayed = false;
-    // fwrite($fh, "$tdmSQLFiltered");
-    // fclose($fh);
-    // exit;
-
+	
+	# Convert result to csv and push use to download
     $num_fields = mysqli_num_fields($result);
-
     $fp = fopen('php://output', 'w');
     if ($fp && $result) {
         header('Content-Type: text/csv');
-        header('Content-Disposition: attachment; filename="export.csv"');
+        header('Content-Disposition: attachment; filename="tdsm_export.csv"');
         header('Pragma: no-cache');
         header('Expires: 0');
         fputcsv($fp, $headers);
@@ -257,8 +243,6 @@
         }
         die;
     }
-    # Display result as table
-    echo "Results:";
 
     /*
     echo "<table id='results'>";
