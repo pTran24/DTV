@@ -243,7 +243,6 @@
         }
         die;
     }
-
     /*
     echo "<table id='results'>";
         echo "<thead>";
