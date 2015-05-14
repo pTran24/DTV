@@ -2,12 +2,12 @@
 <html>
 <head>
     <meta charset='utf-8'/>
-
     <title>TDM Query</title>
     <link rel="stylesheet" href="css/banner.css" />
     <link rel="stylesheet" href="css/menu.css" />
     <link rel="stylesheet" href="css/tdmquery.css" />
-<!--	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" />-->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
 </head>
 <body>
     <?php
@@ -133,8 +133,6 @@
         <?php endif; ?>
     </div>
 
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-    <script src="js/jquery-1.11.1.min.js"></script>
 	<script>
 	$(document).ready(function() {
 		$('#tabs li a:not(:first)').addClass('inactive');
