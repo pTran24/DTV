@@ -9,7 +9,7 @@
     <script src="js/menu.js" /></script>
 </head>
 <body>
-    <?php include_once("../menu.html"); ?>
+    <?php include_once("../banner_nav.html"); ?>
 	<div id="page-wrap">
 		<?php //CREATE CONNECTION, GET FORM INFORMATION
 		// Create connection

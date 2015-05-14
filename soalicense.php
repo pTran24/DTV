@@ -10,7 +10,7 @@
 	<script src="js/jquery.pivot.js"></script>
 </head>
 <body>
-	<?php include_once("/menu.html"); ?>
+	<?php include_once("/banner_nav.html"); ?>
 	<?php
 	$csv_output = "";
 

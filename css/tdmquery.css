@@ -1,6 +1,27 @@
-.query {
-    white-space: pre-wrap;
+a {cursor:pointer;}
+
+table#results {
+    color: #333;
+    font-family: Helvetica, Arial, sans-serif;
+    min-width: 600px;
+    border-collapse:
+    collapse; border-spacing: 0;
 }
+th {
+    height: 25px;
+    background: #F3F3F3; /* Light grey background */
+    font-weight: bold; /* Make sure they're bold */
+}
+
+td {
+    tr td:hover { background: #666; color: #FFF; } /* Hover cell effect! */
+}
+tr td:hover { background: #666; } /* Hover cell effect! */
+/* Cells in even rows (2,4,6...) are one color */
+tr:nth-child(even) td { background: #F1F1F1; }
+
+/* Cells in odd rows (1,3,5...) are another (excludes header cells)  */
+tr:nth-child(odd) td { background: #FEFEFE; }
 
 input[type="text"] {
     width: 40px;
@@ -9,34 +30,100 @@ input[type="text"] {
 form {
     font-family: "Helvetica Neue,Helvetica,Arial,sans-serif";
     font-size: 14px;
+    display: inline;
+}
+button {
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    border-radius: 8px;
+    text-shadow: #591717 1px 1px 1px;
+    font: normal normal bold 12px arial;
+    color: #fffaff;
+    text-decoration: none;
+}
+button[id="run"] {
+    padding: 4px 13px;
+    border: 1px solid #a12727;
+    background: #4aff92;
+    background: -webkit-gradient(linear, left top, left bottom, from(#4aff92), to(#26992e));
+    background: -moz-linear-gradient(top, #4aff92, #26992e);
+    background: linear-gradient(to bottom, #4aff92, #26992e);
+}
+button[id="run"]:hover,
+button[id="run"]:focus {
+    background: #59ffaf;
+    background: -webkit-gradient(linear, left top, left bottom, from(#59ffaf), to(#2eb837));
+    background: -moz-linear-gradient(top, #59ffaf, #2eb837);
+    background: linear-gradient(to bottom, #59ffaf, #2eb837);
+    color: #ffffff;
+    text-decoration: none;
+}
+button[id="run"]:active {
+    background: #2c9958;
+    background: -webkit-gradient(linear, left top, left bottom, from(#2c9958), to(#26992e));
+    background: -moz-linear-gradient(top, #2c9958, #26992e);
+    background: linear-gradient(to bottom, #2c9958, #26992e);
+}
+button[id="run"]:before{
+    content:  "\0000a0";
+    display: inline-block;
+    height: 24px;
+    width: 24px;
+    line-height: 24px;
+    margin: 0 4px -6px -4px;
+    position: relative;
+    top: 0px;
+    left: 0px;
+    background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAABWUlEQVRIie2SMUoDURRFz5UsQYJVGMIsQKxtZLD/AwbBxrW4BJdgL+SnlsFCa3EBIQypxC2M+CySH74hzp8hlrkwxfzHu/e9+y4ckIDaipPJhKZpboB7YAlce+/nfQSO2opN05wDD8AxcAY8OefG/yYAnEoaSKtFJWVA1UekVcDMHs1sbmZIwswAgki+t8BsNvsACmABICl8GR3tSlmE934JFGa2CG/rjTI62NWaohjOuRFQAXlkF0ANXP6Vrs4CkcizpF9Tm1kNXHjv6+2epEUxEnbd7erpJQCrQ2+Rh9/vvQXKshyZWSVpHN0gWLTfBmVZjoANeYismdWSil3+Q8cjO+cySRUwjm1ZT1547xd/9SYFQnKATXLC5CnypIBz7gR4kZRvHbQGiul02koO6RtcScrD1H3JAQaJ+ruZfUkarFNT08GWGK0bDIfDV+DWzD6Bt77kB3TCD1cuo2reO+LVAAAAAElFTkSuQmCC") no-repeat left center transparent;
+    background-size: 100% 100%;
 }
 
-input[type="submit"] {
-  	-webkit-border-radius: 9;
-  	-moz-border-radius: 9;
-  	border-radius: 9px;
-  	font-family: Arial;
-  	color: #ffffff;
-  	font-size: 14px;
-  	background: #2c8a65;
-  	padding: 7px 11px 7px 11px;
-		text-decoration: none;
-}
 
-#sub:hover {
-  background: #46bda5;
-  text-decoration: none;
-  cursor: pointer;
+button[id="download"] {
+    padding: 4px 13px;
+    border: 1px solid #a12727;
+    background: #4a9bff;
+    background: -webkit-gradient(linear, left top, left bottom, from(#4a9bff), to(#262c99));
+    background: -moz-linear-gradient(top, #4a9bff, #262c99);
+    background: linear-gradient(to bottom, #4a9bff, #262c99);
+}
+button[id="download"]:hover,
+button[id="download"]:focus {
+    background: #59baff;
+    background: -webkit-gradient(linear, left top, left bottom, from(#59baff), to(#2e35b8));
+    background: -moz-linear-gradient(top, #59baff, #2e35b8);
+    background: linear-gradient(to bottom, #59baff, #2e35b8);
+    color: #fffaff;
+    text-decoration: none;
+}
+button[id="download"]:active {
+    background: #2c5d99;
+    background: -webkit-gradient(linear, left top, left bottom, from(#2c5d99), to(#262c99));
+    background: -moz-linear-gradient(top, #2c5d99, #262c99);
+    background: linear-gradient(to bottom, #2c5d99, #262c99);
+}
+button[id="download"]:before{
+    content:  "\0000a0";
+    display: inline-block;
+    height: 24px;
+    width: 24px;
+    line-height: 24px;
+    margin: 0 4px -6px -4px;
+    position: relative;
+    top: 0px;
+    left: 0px;
+    background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAABKklEQVRIie3Uu0oDURAG4M9LmcIiRQqxFskTiCwi2NkJmjJPIlj5GCnstRFB0gRfwUYQwQdQLCSNS4hFzsp63JsXSJMfBnbnzPxzO3NYYN5Y+qH9FhK08YwR7v8jkQ4ukWKakzToO38lf4yIY3koC1LWojYOsI59s7aMcBvOE+xGPhc4bJJxD68FWZ7mbE4KzlNsxmTL0X+Cc6wVBJ7UJLYa/L8pM7RxFunyWCn5zuMY77gyu2WfFfTMBrVdk2WGsmr2MAhcvUyZ+H79MrlDqyJQK9gU+aaB27DEIJNBRYBBje8QxjVGU/QLyPsN/MZNA7yhmyPvBl2jAHUtiudR1fdYbqgectE86vqeH/JOVnLZ9v5WXnDE17coe382lC9SHSZ4wrWwaAvMHx98xbTF6oovjgAAAABJRU5ErkJggg==") no-repeat left center transparent;
+    background-size: 100% 100%;
 }
 
 #tabs {
-		width: 100%;
-		height:30px;
-		border-bottom: solid 1px #CCC;
-		padding-right: 2px;
+	width: 100%;
+	height:30px;
+	border-bottom: solid 1px #CCC;
+	padding-right: 2px;
 }
-
-a {cursor:pointer;}
 
 #tabs li {
     float:left;
@@ -47,17 +134,17 @@ a {cursor:pointer;}
     margin-right:0px;
     border-top-left-radius:3px;
     border-top-right-radius:3px;
-		outline:none;
+	outline:none;
 }
 
 #tabs li a {
     font-family:Arial, Helvetica, sans-serif;
     font-size: small;
     font-weight: bold;
-    color: #5685bc;;
-		padding-top: 5px;
-		padding-left: 7px;
-		padding-right: 7px;
+    color: #5685bc;
+	padding-top: 5px;
+	padding-left: 7px;
+	padding-right: 7px;
     padding-bottom: 8px;
     display:block;
     background: #FFF;
@@ -68,19 +155,19 @@ a {cursor:pointer;}
 }
 
 #tabs li a.inactive{
-		border-bottom: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
     color:#666666;
     background: #EEE;
 }
 
 #tabs li a:hover, #tabs li a.inactive:hover {
-		color: #5685bc;
-		outline:none;
+	color: #5685bc;
+	outline:none;
 }
 
 .container {
-		clear:both;
-		width:100%;
-		text-align:left;
-		padding-top: 20px;
+	clear:both;
+	width:100%;
+	text-align:left;
+	padding-top: 10px;
 }

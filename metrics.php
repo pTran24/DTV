@@ -8,7 +8,7 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 </head>
 <body>
-    <?php include_once("/menu.html"); ?>
+    <?php include_once("/banner_nav.html"); ?>
     <div id='page-wrap'>
         <?php
         date_default_timezone_set('America/Los_Angeles');

@@ -10,7 +10,7 @@
     <script src="js/jquery.dataTables.js"></script>
 </head>
 <body>
-    <?php include_once("menu.html"); ?>
+    <?php include_once("banner_nav.html"); ?>
     <div id='page-wrap'>
         <?php
         # Read in config file
