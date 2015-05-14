@@ -7,7 +7,7 @@ SELECT
     SUM(CASE WHEN status='down' THEN 1 ELSE 0 END) AS 'Down',
     count(serviceName) as '$beginDate'
 FROM
-    log
+    lisalog
 GROUP BY
     hostip WITH ROLLUP;
 ";
