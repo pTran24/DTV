@@ -17,13 +17,13 @@
         $configfile = fopen("Wamp.conf", "r") or die("Unable to open file!");
         while(!feof($configfile)) {
             $line = fgets($configfile);
-            if (preg_match("/mysqlhost=(.*)/", $line, $match)) {
+            if (preg_match("/omsr3host=(.*)/", $line, $match)) {
                 $host = trim($match[1]);
             }
-            if (preg_match("/mysqlusr=(.*)/", $line, $match)) {
+            if (preg_match("/omsusr=(.*)/", $line, $match)) {
                 $user = trim($match[1]);
             }
-            if (preg_match("/mysqlpw=(.*)/", $line, $match)) {
+            if (preg_match("/omspw=(.*)/", $line, $match)) {
                 $pw = trim($match[1]);
             }
         }
